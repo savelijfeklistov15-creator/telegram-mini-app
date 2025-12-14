@@ -1,85 +1,153 @@
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
-    background: #f5f5f5;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+    background: #f4f4f4;
     color: #111;
 }
 
-header {
-    padding: 16px;
+.tabs {
+    display: flex;
     background: #fff;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #ddd;
 }
 
-h1 {
-    margin: 0;
-    font-size: 20px;
+.tabs button {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    background: none;
+    font-size: 14px;
 }
 
-/* Сетка */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+.tabs button.active {
+    border-bottom: 3px solid #000;
+    font-weight: bold;
+}
+
+.page {
+    display: none;
     padding: 12px;
 }
 
-/* ПК */
-@media (min-width: 1200px) {
-    .grid {
-        grid-template-columns: repeat(5, 1fr);
-    }
+.page.active {
+    display: block;
 }
 
-/* Карточка */
+.discount {
+    background: linear-gradient(90deg,#000,#333);
+    color: #fff;
+    padding: 14px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
+}
+
+@media (min-width: 1200px) {
+    .grid { grid-template-columns: repeat(5,1fr); }
+}
+
 .card {
     background: #fff;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
     display: flex;
     flex-direction: column;
 }
 
-/* Фото */
 .card img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1/1;
     object-fit: cover;
 }
 
-/* Информация */
-.info {
-    padding: 12px;
+.card .info {
+    padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
 .price {
-    font-size: 18px;
     font-weight: 700;
+    font-size: 16px;
 }
 
 .title {
     font-size: 14px;
-    line-height: 1.3;
-    color: #333;
     min-height: 36px;
 }
 
-/* Кнопка */
+.actions {
+    display: flex;
+    gap: 6px;
+}
+
+.actions button {
+    flex: 1;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    font-size: 13px;
+}
+
 .buy {
-    margin-top: auto;
-    text-align: center;
-    padding: 10px;
     background: #000;
     color: #fff;
-    text-decoration: none;
+}
+
+.add {
+    background: #eee;
+}
+
+/* Корзина */
+#cart-items div {
+    background: #fff;
+    padding: 10px;
     border-radius: 10px;
-    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.cart-footer {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.cart-footer button {
+    width: 100%;
+    padding: 12px;
+    background: #000;
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+}
+
+/* Профиль */
+.profile-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.profile-box img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
 }
