@@ -2,90 +2,85 @@
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-    background: #f4f4f4;
-    color: #111;
+    font-family: -apple-system, BlinkMacSystemFont, Roboto;
+    background: #f2f2f2;
 }
 
-.tabs {
-    display: flex;
+.top {
+    padding: 14px;
     background: #fff;
+    text-align: center;
+    font-weight: 700;
     border-bottom: 1px solid #ddd;
 }
 
-.tabs button {
-    flex: 1;
-    padding: 14px;
-    border: none;
-    background: none;
-    font-size: 14px;
-}
+.page { display: none; padding: 12px; }
+.page.active { display: block; }
 
-.tabs button.active {
-    border-bottom: 3px solid #000;
-    font-weight: bold;
-}
-
-.page {
-    display: none;
-    padding: 12px;
-}
-
-.page.active {
-    display: block;
-}
-
-.discount {
-    background: linear-gradient(90deg,#000,#333);
+.promo {
+    background: #000;
     color: #fff;
-    padding: 14px;
-    border-radius: 14px;
-    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 12px;
     text-align: center;
-    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.search {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.categories {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.cat {
+    flex: 1;
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+    background: #e0e0e0;
+}
+
+.cat.active {
+    background: #000;
+    color: #fff;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
 }
 
 @media (min-width: 1200px) {
-    .grid { grid-template-columns: repeat(5,1fr); }
+    .grid { grid-template-columns: repeat(5, 1fr); }
 }
 
 .card {
     background: #fff;
-    border-radius: 16px;
+    border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,.08);
-    display: flex;
-    flex-direction: column;
 }
 
 .card img {
     width: 100%;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
 }
 
-.card .info {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+.info {
+    padding: 8px;
 }
 
-.price {
-    font-weight: 700;
-    font-size: 16px;
-}
-
-.title {
-    font-size: 14px;
-    min-height: 36px;
-}
+.price { font-weight: bold; }
+.title { font-size: 13px; margin: 4px 0; }
 
 .actions {
     display: flex;
@@ -94,60 +89,45 @@ body {
 
 .actions button {
     flex: 1;
-    padding: 8px;
+    padding: 6px;
     border-radius: 8px;
     border: none;
-    font-size: 13px;
 }
 
-.buy {
-    background: #000;
-    color: #fff;
-}
+.buy { background: #000; color: #fff; }
+.add { background: #eee; }
 
-.add {
-    background: #eee;
-}
-
-/* Корзина */
-#cart-items div {
-    background: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 8px;
-}
-
-.cart-footer {
-    position: sticky;
+.bottom {
+    position: fixed;
     bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    background: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.bottom button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: none;
+    font-size: 18px;
+}
+
+.cartBottom {
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    right: 0;
     background: #fff;
     padding: 10px;
     border-top: 1px solid #ddd;
 }
 
-.cart-footer button {
-    width: 100%;
-    padding: 12px;
-    background: #000;
-    color: #fff;
-    border-radius: 10px;
-    border: none;
-}
-
-/* Профиль */
-.profile-box {
-    background: #fff;
-    padding: 20px;
-    border-radius: 16px;
+.profile {
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
-}
-
-.profile-box img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
 }

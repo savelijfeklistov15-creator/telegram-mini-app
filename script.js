@@ -1,79 +1,82 @@
 Telegram.WebApp.ready();
 
-/* ТОВАРЫ (30 ШТУК) */
-const products = Array.from({ length: 30 }, (_, i) => ({
-    id: i,
-    title: Товар №${i + 1},
-    price: Math.floor(Math.random() * 40000 + 5000),
-    image: "https://picsum.photos/400?random=" + i,
-    link: "https://www.avito.ru/"
-}));
+const products = [
+    {id:1, title:"iPhone 12", price:25000, cat:"phones", img:"https://picsum.photos/400?1"},
+    {id:2, title:"iPhone 13", price:32000, cat:"phones", img:"https://picsum.photos/400?2"},
+    {id:3, title:"Samsung S21", price:21000, cat:"phones", img:"https://picsum.photos/400?3"},
+    {id:4, title:"AirPods", price:9000, cat:"tech", img:"https://picsum.photos/400?4"},
+    {id:5, title:"PlayStation 5", price:48000, cat:"tech", img:"https://picsum.photos/400?5"},
+    {id:6, title:"Ноутбук", price:55000, cat:"tech", img:"https://picsum.photos/400?6"},
+    {id:7, title:"Кресло", price:7000, cat:"other", img:"https://picsum.photos/400?7"},
+    {id:8, title:"Часы", price:6000, cat:"other", img:"https://picsum.photos/400?8"}
+];
 
-const grid = document.getElementById("products");
-const cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
+let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-/* РЕНДЕР ТОВАРОВ */
-products.forEach(p => {
-    grid.innerHTML += `
-    <div class="card">
-        <img src="${p.image}">
-        <div class="info">
-            <div class="price">${p.price} ₽</div>
-            <div class="title">${p.title}</div>
-            <div class="actions">
-                <button class="buy" onclick="window.open('${p.link}')">Купить</button>
-                <button class="add" onclick="addToCart(${p.id})">+</button>
+function render(list) {
+    const grid = document.getElementById("products");
+    grid.innerHTML = "";
+    list.forEach(p => {
+        grid.innerHTML += `
+        <div class="card">
+            <img src="${p.img}">
+            <div class="info">
+                <div class="price">${p.price} ₽</div>
+                <div class="title">${p.title}</div>
+                <div class="actions">
+                    <button class="buy">Купить</button>
+                    <button class="add" onclick="add(${p.id})">+</button>
+                </div>
             </div>
-        </div>
-    </div>`;
-});
-
-/* НАВИГАЦИЯ */
-function showPage(id) {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.querySelectorAll(".tabs button").forEach(b => b.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-    event.target.classList.add("active");
-    if (id === "cart") renderCart();
-}
-
-/* КОРЗИНА */
-function addToCart(id) {
-    cartItems.push(products[id]);
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-    alert("Добавлено в корзину");
-}
-
-function renderCart() {
-    const box = document.getElementById("cart-items");
-    box.innerHTML = "";
-    let total = 0;
-    cartItems.forEach(i => {
-        total += i.price;
-        box.innerHTML += <div>${i.title} — ${i.price} ₽</div>;
+        </div>`;
     });
-    document.getElementById("total").innerText = "Итого: " + total + " ₽";
+}
+
+render(products);
+
+function openPage(id) {
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    document.getElementById("pageTitle").innerText =
+        id === "shop" ? "Объявления" : id === "cart" ? "Корзина" : "Профиль";
+    if(id==="cart") showCart();
+}
+
+function filterCat(cat, btn) {
+    document.querySelectorAll(".cat").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    render(cat==="all"?products:products.filter(p=>p.cat===cat));
+}
+
+function add(id) {
+    cart.push(products.find(p=>p.id===id));
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function showCart() {
+    const box = document.getElementById("cartItems");
+    let sum = 0;
+    box.innerHTML = "";
+    cart.forEach(p=>{
+        sum+=p.price;
+        box.innerHTML += <div>${p.title} — ${p.price} ₽</div>;
+    });
+    document.getElementById("cartTotal").innerText = "Итого: "+sum+" ₽";
 }
 
 function checkout() {
-    alert("Оформление через Avito");
+    alert("Переход на Avito");
 }
 
-/* ПРОФИЛЬ */
 function saveProfile() {
-    localStorage.setItem("name", username.value);
-    alert("Сохранено");
+    localStorage.setItem("name", name.value);
 }
 
 function setAvatar(e) {
-    const reader = new FileReader();
-    reader.onload = () => {
-        avatar.src = reader.result;
-        localStorage.setItem("avatar", reader.result);
-    };
-    reader.readAsDataURL(e.target.files[0]);
+    const r = new FileReader();
+    r.onload = ()=>{ avatar.src=r.result; localStorage.setItem("avatar",r.result); };
+    r.readAsDataURL(e.target.files[0]);
 }
 
-/* ЗАГРУЗКА ПРОФИЛЯ */
-username.value = localStorage.getItem("name") || "";
-if (localStorage.getItem("avatar")) avatar.src = localStorage.getItem("avatar");
+if(localStorage.getItem("avatar")) avatar.src = localStorage.getItem("avatar");
+name.value = localStorage.getItem("name") || "";

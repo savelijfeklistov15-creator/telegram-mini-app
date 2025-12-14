@@ -2,51 +2,64 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Маркет</title>
+    <title>Mini Market</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Навигация -->
-<nav class="tabs">
-    <button onclick="showPage('shop')" class="active">🏠 Объявления</button>
-    <button onclick="showPage('cart')">🛒 Корзина</button>
-    <button onclick="showPage('profile')">👤 Профиль</button>
+<!-- HEADER -->
+<header class="top">
+    <span id="pageTitle">Объявления</span>
+</header>
+
+<!-- PAGES -->
+<main>
+
+    <!-- SHOP -->
+    <section id="shop" class="page active">
+        <div class="promo">🔥 Скидки до 40% сегодня</div>
+
+        <input class="search" placeholder="Поиск товара">
+
+        <div class="categories">
+            <button class="cat active" onclick="filterCat('all', this)">Все</button>
+            <button class="cat" onclick="filterCat('phones', this)">Телефоны</button>
+            <button class="cat" onclick="filterCat('tech', this)">Техника</button>
+            <button class="cat" onclick="filterCat('other', this)">Другое</button>
+        </div>
+
+        <div class="grid" id="products"></div>
+    </section>
+
+    <!-- CART -->
+    <section id="cart" class="page">
+        <div id="cartItems"></div>
+        <div class="cartBottom">
+            <span id="cartTotal">Итого: 0 ₽</span>
+            <button onclick="checkout()">Оформить</button>
+        </div>
+    </section>
+
+    <!-- PROFILE -->
+    <section id="profile" class="page">
+        <div class="profile">
+            <img id="avatar">
+            <input type="file" accept="image/*" onchange="setAvatar(event)">
+            <input id="name" placeholder="Ваше имя">
+            <button onclick="saveProfile()">Сохранить</button>
+        </div>
+    </section>
+
+</main>
+
+<!-- NAV -->
+<nav class="bottom">
+    <button onclick="openPage('shop')">🏠</button>
+    <button onclick="openPage('cart')">🛒</button>
+    <button onclick="openPage('profile')">👤</button>
 </nav>
-
-<!-- ОБЪЯВЛЕНИЯ -->
-<section id="shop" class="page active">
-
-    <div class="discount">
-        🔥 СКИДКИ ДО 30% НА ВЫБРАННЫЕ ТОВАРЫ
-    </div>
-
-    <div class="grid" id="products"></div>
-</section>
-
-<!-- КОРЗИНА -->
-<section id="cart" class="page">
-    <h2>Корзина</h2>
-    <div id="cart-items"></div>
-    <div class="cart-footer">
-        <div id="total"></div>
-        <button onclick="checkout()">Оформить</button>
-    </div>
-</section>
-
-<!-- ПРОФИЛЬ -->
-<section id="profile" class="page">
-    <h2>Профиль</h2>
-
-    <div class="profile-box">
-        <img id="avatar" src="https://via.placeholder.com/120">
-        <input type="file" accept="image/*" onchange="setAvatar(event)">
-        <input type="text" id="username" placeholder="Ваше имя">
-        <button onclick="saveProfile()">Сохранить</button>
-    </div>
-</section>
 
 <script src="script.js"></script>
 </body>
