@@ -1,53 +1,19 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Mini Market</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test</title>
 </head>
 <body>
 
-<header id="header">Объявления</header>
+<button onclick="show('shop')">Объявления</button>
+<button onclick="show('cart')">Корзина</button>
+<button onclick="show('profile')">Профиль</button>
 
-<main>
-
-<!-- СПИСОК ТОВАРОВ -->
-<section id="list" class="page active">
-  <div class="grid" id="products"></div>
-</section>
-
-<!-- СТРАНИЦА ТОВАРА -->
-<section id="productPage" class="page">
-  <img id="productImg">
-  <h2 id="productTitle"></h2>
-  <div id="productPrice"></div>
-  <button onclick="addCurrentToCart()">Добавить в корзину</button>
-  <button onclick="buy()">Купить</button>
-</section>
-
-<!-- КОРЗИНА -->
-<section id="cart" class="page">
-  <div id="cartItems"></div>
-  <div id="total"></div>
-</section>
-
-<!-- ПРОФИЛЬ -->
-<section id="profile" class="page">
-  <img id="avatar">
-  <input type="file" accept="image/*" onchange="setAvatar(event)">
-  <input id="name" placeholder="Ваш никнейм">
-  <button onclick="saveProfile()">Сохранить</button>
-</section>
-
-</main>
-
-<nav>
-  <button onclick="openPage('list')">Объявления</button>
-  <button onclick="openPage('cart')">Корзина</button>
-  <button onclick="openPage('profile')">Профиль</button>
-</nav>
+<div id="shop">Здесь будут объявления</div>
+<div id="cart" style="display:none">Корзина пустая</div>
+<div id="profile" style="display:none">Профиль</div>
 
 <script src="script.js"></script>
 </body>
