@@ -1,90 +1,46 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <title>Mini App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+let currentProduct = null;
+let cart = [];
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      padding-bottom: 60px;
-    }
+function show(id) {
+  document.getElementById("shop").style.display = "none";
+  document.getElementById("product").style.display = "none";
+  document.getElementById("cart").style.display = "none";
+  document.getElementById("profile").style.display = "none";
 
-    .screen {
-      display: none;
-      padding: 20px;
-    }
+  document.getElementById(id).style.display = "block";
 
-    .nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      display: flex;
-      border-top: 1px solid #ccc;
-      background: #fff;
-    }
+  if (id === "cart") renderCart();
+}
 
-    .nav button {
-      flex: 1;
-      padding: 15px;
-      border: none;
-      background: none;
-      font-size: 16px;
-    }
+function openProduct(title, price) {
+  currentProduct = { title, price };
+  document.getElementById("productTitle").innerText = title;
+  document.getElementById("productPrice").innerText = price + " ₽";
+  show("product");
+}
 
-    .item {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-  </style>
-</head>
-<body>
+function addToCart() {
+  if (!currentProduct) return;
+  cart.push(currentProduct);
+  alert("Добавлено в корзину");
+}
 
-<!-- ОБЪЯВЛЕНИЯ -->
-<div id="shop" class="screen">
-  <h2>Объявления</h2>
+function renderCart() {
+  const items = document.getElementById("cartItems");
+  const total = document.getElementById("cartTotal");
 
-  <div class="item" onclick="openProduct('iPhone 13', 50000)">
-    <b>iPhone 13</b><br>
-    Цена: 50 000 ₽
-  </div>
+  items.innerHTML = "";
+  let sum = 0;
 
-  <div class="item" onclick="openProduct('Samsung S22', 42000)">
-    <b>Samsung S22</b><br>
-    Цена: 42 000 ₽
-  </div>
-</div>
+  cart.forEach(p => {
+    sum += p.price;
+    items.innerHTML += <p>${p.title} — ${p.price} ₽</p>;
+  });
 
-<!-- ТОВАР -->
-<div id="product" class="screen">
-  <h2 id="productTitle"></h2>
-  <p id="productPrice"></p>
+  total.innerText = "Итого: " + sum + " ₽";
+}
 
-  <button onclick="show('shop')">Назад</button>
-</div>
-
-<!-- КОРЗИНА -->
-<div id="cart" class="screen">
-  <h2>Корзина</h2>
-  <p>Пока пусто</p>
-</div>
-
-<!-- ПРОФИЛЬ -->
-<div id="profile" class="screen">
-  <h2>Профиль</h2>
-  <p>Пока пусто</p>
-</div>
-
-<!-- НИЖНЕЕ МЕНЮ -->
-<div class="nav">
-  <button onclick="show('shop')">Объявления</button>
-  <button onclick="show('cart')">Корзина</button>
-  <button onclick="show('profile')">Профиль</button>
-</div>
-
-<script src="script.js"></script>
-</body>
-</html>
+// 🔑 КЛЮЧЕВОЙ МОМЕНТ
+document.addEventListener("DOMContentLoaded", () => {
+  show("shop");
+});
