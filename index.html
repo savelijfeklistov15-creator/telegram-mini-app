@@ -1,70 +1,64 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>TEST</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      padding-bottom: 60px;
-    }
-    .screen {
-      display: none;
-      padding: 20px;
-    }
-    .nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      border-top: 1px solid #000;
-      background: #eee;
-    }
-    .nav button {
-      flex: 1;
-      padding: 15px;
-      border: none;
-      background: none;
-      font-size: 16px;
-    }
-  </style>
+  <title>Mini Market</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="shop" class="screen">
-  <h1>ОБЪЯВЛЕНИЯ</h1>
-  <p>Это экран объявлений</p>
-</div>
+<header>
+  <h1>MiniMarket</h1>
+</header>
 
-<div id="cart" class="screen">
-  <h1>КОРЗИНА</h1>
-  <p>Это корзина</p>
-</div>
+<nav class="bottom-nav">
+  <button onclick="openPage('home')">🏠</button>
+  <button onclick="openPage('cart')">🛒</button>
+  <button onclick="openPage('profile')">👤</button>
+  <button onclick="openPage('page4')">📦</button>
+  <button onclick="openPage('page5')">⚙️</button>
+</nav>
 
-<div id="profile" class="screen">
-  <h1>ПРОФИЛЬ</h1>
-  <p>Это профиль</p>
-</div>
+<main>
+  <!-- HOME -->
+  <section id="home" class="page active">
+    <div class="products" id="products"></div>
+  </section>
 
-<div class="nav">
-  <button onclick="show('shop')">Объявления</button>
-  <button onclick="show('cart')">Корзина</button>
-  <button onclick="show('profile')">Профиль</button>
-</div>
+  <!-- CART -->
+  <section id="cart" class="page">
+    <h2>Корзина</h2>
+    <div id="cartItems"></div>
+    <div class="cart-total">
+      <span>Итого:</span>
+      <strong id="totalPrice">0 ₽</strong>
+    </div>
+  </section>
 
-<script>
-  function show(id) {
-    document.getElementById('shop').style.display = 'none';
-    document.getElementById('cart').style.display = 'none';
-    document.getElementById('profile').style.display = 'none';
-    document.getElementById(id).style.display = 'block';
-  }
+  <!-- PROFILE -->
+  <section id="profile" class="page">
+    <h2>Профиль</h2>
+    <div class="profile">
+      <img id="avatarPreview" src="https://via.placeholder.com/100">
+      <input type="file" accept="image/*" onchange="loadAvatar(event)">
+      <input type="text" id="nickname" placeholder="Ваш ник">
+      <button onclick="saveProfile()">Сохранить</button>
+    </div>
+  </section>
 
-  show('shop');
-</script>
+  <!-- PAGE 4 -->
+  <section id="page4" class="page empty">
+    <p>Раздел в разработке</p>
+  </section>
 
+  <!-- PAGE 5 -->
+  <section id="page5" class="page empty">
+    <p>Раздел в разработке</p>
+  </section>
+</main>
+
+<script src="script.js"></script>
 </body>
 </html>
