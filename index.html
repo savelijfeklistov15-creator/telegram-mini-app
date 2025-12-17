@@ -39,24 +39,54 @@
 
   <!-- PROFILE -->
   <section id="profile" class="page">
-    <h2>Профиль</h2>
-    <div class="profile">
-      <img id="avatarPreview" src="https://via.placeholder.com/100">
+    <div class="profile-header">
+      <img id="profileAvatar" src="https://via.placeholder.com/100">
+      <span id="profileNick">Гость</span>
+      <button class="dots" onclick="toggleProfileEdit()">⋮</button>
+    </div>
+
+    <div class="profile-edit" id="profileEdit">
       <input type="file" accept="image/*" onchange="loadAvatar(event)">
       <input type="text" id="nickname" placeholder="Ваш ник">
       <button onclick="saveProfile()">Сохранить</button>
     </div>
   </section>
 
-  <!-- PAGE 4 -->
-  <section id="page4" class="page empty">
-    <p>Раздел в разработке</p>
-  </section>
+  <!-- index.html (ЗАМЕНИ ТОЛЬКО МОДАЛКУ ТОВАРА) -->
 
-  <!-- PAGE 5 -->
-  <section id="page5" class="page empty">
-    <p>Раздел в разработке</p>
-  </section>
+<!-- PRODUCT MODAL -->
+<div class="modal" id="productModal">
+  <div class="modal-content product-page">
+    <button class="close" onclick="closeProduct()">✕</button>
+
+    <div class="product-gallery">
+      <img id="modalImg">
+    </div>
+
+    <div class="product-info">
+      <h2 id="modalName"></h2>
+
+      <div class="price-row">
+        <span class="price" id="modalPrice"></span>
+      </div>
+
+      <div class="product-actions">
+        <button class="buy-btn" onclick="addToCart(currentProductId)">
+          Добавить в корзину
+        </button>
+      </div>
+
+      <div class="product-desc">
+        <h4>Описание</h4>
+        <p id="modalDesc"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- PAGE 4 -->
+  <section id="page4" class="page empty">Раздел в разработке</section>
+  <section id="page5" class="page empty">Раздел в разработке</section>
 </main>
 
 <script src="script.js"></script>
