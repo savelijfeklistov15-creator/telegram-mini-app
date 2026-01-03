@@ -1,94 +1,25 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Mini Market</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Шифратор</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Telegram WebApp -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <h1>MiniMarket</h1>
-</header>
+    <h2>Шифрование</h2>
+    <textarea id="inputText" placeholder="Введите текст"></textarea>
+    <button onclick="encrypt()">Зашифровать</button>
 
-<nav class="bottom-nav">
-  <button onclick="openPage('home')">🏠</button>
-  <button onclick="openPage('cart')">🛒</button>
-  <button onclick="openPage('profile')">👤</button>
-  <button onclick="openPage('page4')">📦</button>
-  <button onclick="openPage('page5')">⚙️</button>
-</nav>
+    <h2>Результат</h2>
+    <textarea id="outputText" placeholder="Результат"></textarea>
+    <button onclick="decrypt()">Расшифровать</button>
 
-<main>
-  <!-- HOME -->
-  <section id="home" class="page active">
-    <div class="products" id="products"></div>
-  </section>
-
-  <!-- CART -->
-  <section id="cart" class="page">
-    <h2>Корзина</h2>
-    <div id="cartItems"></div>
-    <div class="cart-total">
-      <span>Итого:</span>
-      <strong id="totalPrice">0 ₽</strong>
-    </div>
-  </section>
-
-  <!-- PROFILE -->
-  <section id="profile" class="page">
-    <div class="profile-header">
-      <img id="profileAvatar" src="https://via.placeholder.com/100">
-      <span id="profileNick">Гость</span>
-      <button class="dots" onclick="toggleProfileEdit()">⋮</button>
-    </div>
-
-    <div class="profile-edit" id="profileEdit">
-      <input type="file" accept="image/*" onchange="loadAvatar(event)">
-      <input type="text" id="nickname" placeholder="Ваш ник">
-      <button onclick="saveProfile()">Сохранить</button>
-    </div>
-  </section>
-
-  <!-- index.html (ЗАМЕНИ ТОЛЬКО МОДАЛКУ ТОВАРА) -->
-
-<!-- PRODUCT MODAL -->
-<div class="modal" id="productModal">
-  <div class="modal-content product-page">
-    <button class="close" onclick="closeProduct()">✕</button>
-
-    <div class="product-gallery">
-      <img id="modalImg">
-    </div>
-
-    <div class="product-info">
-      <h2 id="modalName"></h2>
-
-      <div class="price-row">
-        <span class="price" id="modalPrice"></span>
-      </div>
-
-      <div class="product-actions">
-        <button class="buy-btn" onclick="addToCart(currentProductId)">
-          Добавить в корзину
-        </button>
-      </div>
-
-      <div class="product-desc">
-        <h4>Описание</h4>
-        <p id="modalDesc"></p>
-      </div>
-    </div>
-  </div>
-</div>
-
-  <!-- PAGE 4 -->
-  <section id="page4" class="page empty">Раздел в разработке</section>
-  <section id="page5" class="page empty">Раздел в разработке</section>
-</main>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
