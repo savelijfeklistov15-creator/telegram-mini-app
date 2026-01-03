@@ -12,14 +12,66 @@
 </head>
 <body>
 
-    <h2>Шифрование</h2>
-    <textarea id="inputText" placeholder="Введите текст"></textarea>
-    <button onclick="encrypt()">Зашифровать</button>
+<div class="app">
 
-    <h2>Результат</h2>
-    <textarea id="outputText" placeholder="Результат"></textarea>
-    <button onclick="decrypt()">Расшифровать</button>
+    <h1>🔐 Шифратор</h1>
 
-    <script src="script.js"></script>
+    <div class="tabs">
+        <button id="tab-encrypt" class="tab active" onclick="setMode('encrypt')">
+            Зашифровать
+        </button>
+        <button id="tab-decrypt" class="tab" onclick="setMode('decrypt')">
+            Расшифровать
+        </button>
+    </div>
+
+    <div class="block">
+        <label id="inputLabel">Исходный текст</label>
+        <textarea id="inputText" placeholder="Введите текст..."></textarea>
+    </div>
+
+    <button class="main-btn" onclick="process()">Выполнить</button>
+
+    <div class="block">
+        <label>Результат</label>
+        <textarea id="outputText" placeholder="Результат..." readonly></textarea>
+        <button class="copy-btn" onclick="copyResult()">📋 Скопировать</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+<script>
+    let mode = 'encrypt';
+
+    function setMode(newMode) {
+        mode = newMode;
+
+        document.getElementById('tab-encrypt').classList.toggle('active', mode === 'encrypt');
+        document.getElementById('tab-decrypt').classList.toggle('active', mode === 'decrypt');
+
+        document.getElementById('inputLabel').innerText =
+            mode === 'encrypt' ? 'Исходный текст' : 'Зашифрованный текст';
+
+        document.getElementById('inputText').value = '';
+        document.getElementById('outputText').value = '';
+    }
+
+    function process() {
+        const input = document.getElementById('inputText').value;
+        if (!input) return;
+
+        document.getElementById('outputText').value =
+            mode === 'encrypt' ? encryptText(input) : decryptText(input);
+    }
+
+    function copyResult() {
+        const output = document.getElementById('outputText');
+        output.select();
+        document.execCommand('copy');
+    }
+</script>
+
 </body>
 </html>
